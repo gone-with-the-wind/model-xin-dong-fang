@@ -8,8 +8,8 @@
 <loading></loading>
 	
 </body>
-<script src="jquery.min.js"></script>
-<script src="angular.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
 <script>
 	
 
@@ -27,7 +27,7 @@ myApp.directive('loading', function(){
         transclude: true,
         template: '<div class="divModal">'
         + '<div ng-show="loading" class="loading">'
-        + '<img alt="" src="onload.gif" style="vertical-align: middle; margin-right: 7px;"/>'
+        + '<img alt="" src="img/onload.gif" style="vertical-align: middle; margin-right: 7px;"/>'
         + '</div>'
         + '</div>',
         link: function (scope, element, attr) {
