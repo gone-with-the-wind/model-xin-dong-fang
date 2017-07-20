@@ -11,3 +11,4 @@
 - [通过AngularJS实现图片上传及缩略图展示](http://www.cnblogs.com/jach/p/5734920.html)
 - [$parse/$eval和$observe/$watch如何区分](http://www.ngnice.com/posts/2314014da4eea8)
 - [**angularjs实现多张图片上传并预览功能**](http://www.jb51.net/article/106661.htm)
+- [**AngularJS图片上传功能的实现**](http://www.cnblogs.com/Uncle-Maize/p/6215710.html)
