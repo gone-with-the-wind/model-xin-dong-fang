@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp" ng-controller="MyCtrl">
+<loading></loading>
+	
+</body>
+<script src="jquery.min.js"></script>
+<script src="angular.min.js"></script>
+<script>
+	
+
+var myApp=angular.module('myApp',[]);
+myApp.controller('MyCtrl', ['$scope','$timeout',function($scope,$timeout){
+	$scope.loading = true;//控制遮罩层显示
+	$timeout(function(){
+	$scope.loading = false;//控制遮罩层隐藏
+	},1000)
+    
+}]);
+myApp.directive('loading', function(){
+	 return {
+        restrict: 'E',
+        transclude: true,
+        template: '<div class="divModal">'
+        + '<div ng-show="loading" class="loading">'
+        + '<img alt="" src="onload.gif" style="vertical-align: middle; margin-right: 7px;"/>'
+        + '</div>'
+        + '</div>',
+        link: function (scope, element, attr) {
+            scope.$watch('loading', function (val) {
+                if (val)
+                    $(element).show();
+                else
+                    $(element).hide();
+                //$(element).show();
+            });
+        }
+    }
+});
+
+
+</script>
+</html>
