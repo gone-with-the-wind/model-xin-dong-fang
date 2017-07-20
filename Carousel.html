@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<div ng-app="app">
+    <div class="row">
+        <div class="col-md-2">
+            <div ng-controller="CarouselController">
+                <carousel current-slide="currentSlide" forward="forward">
+                    <slide ng-repeat="img in images">
+                        <img ng-src="{{img}}" alt=""/>
+                    </slide>
+                </carousel>
+                <button ng-click="prev()" class="btn btn-primary">Prev</button>
+                <button ng-click="next()" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/angular.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+	angular.module('app', ['carousel']).
+    controller('CarouselController', function($scope, $element){
+        $scope.images = [
+            './img/img1.jpg',
+            './img/img2.jpg',
+            './img/img3.jpg',
+            './img/img4.jpg'
+            
+        ];
+        $scope.currentSlide = 1;
+
+        $scope.prev = function(){
+            $scope.forward = false;
+            $scope.currentSlide = ($scope.currentSlide + $scope.images.length - 1) % $scope.images.length;
+        };
+        $scope.next = function(){
+            $scope.forward = true;
+            $scope.currentSlide = ($scope.currentSlide + 1) % $scope.images.length;
+        };
+    });
+</script>
+</body>
+</html>
