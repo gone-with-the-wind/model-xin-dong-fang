@@ -8,3 +8,4 @@
 - [jQuery UI Bootstrap-基于Bootstrap样式的 jQuery UI 控件 (v0.5)](http://www.bootcss.com/p/jquery-ui-bootstrap/)
 - [AngularJS+ui.bootstrap实现图片轮播](http://blog.csdn.net/yateswang/article/details/47751477)
 - [AngularJS实现一个简单的Carousel](http://www.angularjs.cn/A1cF)
+- [通过AngularJS实现图片上传及缩略图展示](http://www.cnblogs.com/jach/p/5734920.html)
