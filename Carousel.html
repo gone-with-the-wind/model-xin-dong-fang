@@ -22,12 +22,16 @@
     </div>
 </div>
 
+
+</body>
 <script src="js/angular.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
 <script>
-	angular.module('app', ['carousel']).
-    controller('CarouselController', function($scope, $element){
+    var app=angular.module('app', ['carousel'])
+
+    app.controller('CarouselController', function($scope){
         $scope.images = [
             './img/img1.jpg',
             './img/img2.jpg',
@@ -47,5 +51,4 @@
         };
     });
 </script>
-</body>
 </html>
