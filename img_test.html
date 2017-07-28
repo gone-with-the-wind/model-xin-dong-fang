@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+    ul{
+        list-style: none;
+        display: block;
+        overflow: hidden;
+    }
+    ul li{
+    	border: 1px solid blue;
+    	width:80px;
+    	height:60px;
+    	float: left;
+    	
+    	overflow: hidden;
+    	position: relative;
+        
+    }
+    ul li img{
+        width: 100%;
+        height: 100%;
+		
+        border: 1px solid green;
+        
+    }
+    ul li input{
+		border: 1px solid black;
+		position: absolute;
+		top: 0;
+		right: 0;
+    }
+</style>
+<body ng-app="myApp" ng-controller="ctrl">
+<ul class="upload-view-ul">
+
+    <li ng-repeat="src in imgSrcArr">
+        <img ng-src="{{src}}" >
+        <input type="checkbox" ng-click="select(src,$event)" ng-checked="true">
+    </li>
+
+    <li ng-repeat="src in imgSrcArrTem">
+        <img ng-src="{{src}}" >
+        <input type="checkbox" ng-checked="true">
+    </li>
+    
+</ul>
+
+<form class="upload">
+        <input type="file" ng-file-select="onFileSelect($files, $event)" multiple>
+        <button ng-click="FormdataPost()">上传</button>
+</form>
+
+</body>
+<script src="js/angular.min.js"></script>
+<script>
+    var app=angular.module('myApp',[]);
+    app.directive('ngFileSelect', [ '$parse', '$timeout', function($parse, $timeout) {
+        return function(scope, elem, attr) {
+            var fn = $parse(attr['ngFileSelect']);
+            elem.bind('change', function(evt) {
+                var files = [], fileList, i;
+                fileList = evt.target.files;
+                if (fileList != null) {
+                    for (i = 0; i < fileList.length; i++) {
+                        files.push(fileList.item(i));
+                    }
+                }
+                $timeout(function() {
+                    fn(scope, {
+                        $files : files,
+                        $event : evt
+                    });
+                });
+            });
+        };
+    }])
+    
+
+
+    app.service( "fileUploadService", ["$http", function($http){
+        this.fileUpload = function( fileArr, uploadUrl ){ 
+            var fd = new FormData(); 
+            if(fileArr && angular.isArray(fileArr)) {
+            fileArr.forEach(function(item) {
+                fd.append('file', item, item.name);
+            });
+        }
+            
+            $http.post( 
+                uploadUrl, 
+                fd, 
+                { 
+                    transformRequest: angular.identity,
+                    headers: { "Content-Type": undefined } 
+                }) 
+            .then(function(){
+                alert("success")
+            },function(){
+                alert("error")
+            })
+    }
+}])
+
+
+    
+
+
+
+
+
+    app.controller("ctrl",["$scope","$rootScope","$http","$timeout","fileReader","fileUploadService","$log",function($scope,$rootScope,$http,$timeout,fileReader,fileUploadService,$log){
+        $scope.fileArr = [];
+        $scope.fileArrTem=[];
+        $scope.imgSrcArr = [];  
+        $scope.imgSrcArrTem=[];
+        $rootScope.FormdataPost=function(){
+            fileUploadService.fileUpload($scope.fileArr, "http://0.0.0.1");
+        }    
+
+        $rootScope.select = 
+        function(src,event){  
+        	 
+        	var action = event.target;
+        	
+        	
+        	var indexTem=$scope.imgSrcArrTem.indexOf(src);
+        	var index=$scope.imgSrcArr.indexOf(src);
+        	 
+        	
+            if(action.checked){//选中，就添加
+            	//不存在就添加
+            		
+            	 $scope.imgSrcArrTem.push($scope.imgSrcArr[index]);	
+            	$scope.fileArrTem.push($scope.imgSrcArr[index]);	
+            	
+                   
+                
+            	
+            }else{//去除就删除result里
+            	
+               //不存在就添加
+                	
+            		 $scope.imgSrcArrTem.splice(indexTem,1);
+                     
+
+            		$scope.fileArrTem.splice(indexTem,1);
+
+            		
+                
+            }
+
+            
+            
+ 			// $scope.equipmentFailureInfo.KDDT_STATE=$scope.result.toString();  //将选中的id保存到KDDT_STATE字段中	
+        };
+        var i = 0; //为ios上图片都为image时添加序号
+        $rootScope.onFileSelect = function(files,event){
+            //预览上传图片开始
+            // $rootScope.startLoading();
+            var $this = angular.element(event.target);
+
+            angular.forEach(files, function(value, index) {
+                var fileIn = value;
+                var fileInName = fileIn.name;
+                var fileType = fileInName.substring(fileInName.lastIndexOf(".") + 1, fileInName.length);
+
+                //解决ios下所有图片都为image.jpg的bug
+                if(fileIn) {
+                    fileInName = fileInName.split('.')[0] + i + '.' + fileType;
+                    i++;
+                }
+                
+                // attachvo.push({
+                //  name: fileInName,
+                //  type: fileType
+                // });
+
+                fileReader.readAsDataUrl(fileIn, $scope)
+                .then(function(result) {
+
+                    result.name = fileInName;
+
+                    var fileLength=$scope.fileArr.push(result);
+                    $scope.fileArrTem.push($scope.fileArr[fileLength-1]);
+                    var imgLength=$scope.imgSrcArr.push(URL.createObjectURL(result));
+                    $scope.imgSrcArrTem.push($scope.imgSrcArr[imgLength-1]);
+                   
+                    
+　　　　　　　　　　　　　　//每次上传后清空file框，确保每次都能调用change事件
+                    document.querySelector('.upload').reset();
+
+                });
+
+
+                
+                
+               
+
+                $scope.$on('fileProgress', function(event, data) {
+                    if(data.total == data.loaded) {
+                        $timeout(function() {
+                            //上传图片结束
+                            // $rootScope.endLoading();
+                        }, 200)
+                    }
+                });            
+            });
+            
+        };
+        return false;
+    }])
+    app.factory('fileReader', ['$q', '$log', function($q, $log) {
+        var dataURItoBlob = function(dataURI) {  
+            // convert base64/URLEncoded data component to raw binary data held in a string  
+            var byteString;  
+            if (dataURI.split(',')[0].indexOf('base64') >= 0)  
+                byteString = atob(dataURI.split(',')[1]);  
+            else  
+                byteString = unescape(dataURI.split(',')[1]);  
+      
+            // separate out the mime component  
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];  
+      
+            // write the bytes of the string to a typed array  
+            var ia = new Uint8Array(byteString.length);  
+            for (var i = 0; i < byteString.length; i++) {  
+                ia[i] = byteString.charCodeAt(i);  
+            }  
+      
+            return new Blob([ia], {  
+                type: mimeString  
+            });  
+        }; 
+        var onLoad = function(reader, deferred, scope,file) {
+            return function() {
+                scope.$apply(function() {
+                     var img = new Image();
+                     img.src = URL.createObjectURL(file);
+                    //前端压缩图片
+                    img.onload = function(){ 
+                        //resize the image using canvas  
+                        var canvas = document.createElement("canvas");  
+                        var ctx = canvas.getContext("2d");  
+                        var width = img.width;  
+                        var height = img.height; 
+                        
+                        var MAX_WIDTH = width>2500 ?  width/2 : 2500;  
+                        var MAX_HEIGHT = height>2500 ? height/2 : 2500;
+                        if (width > height) {  
+                            if (width > MAX_WIDTH) {  
+                                height *= MAX_WIDTH / width;  
+                                width = MAX_WIDTH;  
+                            }  
+                        } else {  
+                            if (height > MAX_HEIGHT) {  
+                                width *= MAX_HEIGHT / height;  
+                                height = MAX_HEIGHT;  
+                            }  
+                        }
+    
+                        canvas.width = width ;  
+                        canvas.height = height; 
+    
+                        ctx.drawImage(img, 0, 0, width, height);  
+    
+                        
+                        var dataURL = canvas.toDataURL('image/jpeg', 1);
+                        var blob = dataURItoBlob(dataURL); 
+                        if(blob.size > 2000 * 1024){
+                            dataURL = canvas.toDataURL('image/jpeg', .2);
+                        }else if(blob.size > 1000 * 1024){
+                            dataURL = canvas.toDataURL('image/jpeg', .5);
+                            
+                        }else{
+                            dataURL = canvas.toDataURL('image/jpeg', .8);
+                        }
+                        blob = dataURItoBlob(dataURL);
+                        deferred.resolve(blob);
+                    }
+                    
+
+                    
+                });
+            };
+        };
+
+        var onError = function(reader, deferred, scope) {
+            return function() {
+                scope.$apply(function() {
+                    deferred.reject(reader.result);
+                });
+            };
+        };
+
+        var onProgress = function(reader, scope) {
+            return function(event) {
+                
+                scope.$broadcast("fileProgress", {
+                    total: event.total,
+                    loaded: event.loaded
+                });
+            };
+        };
+
+        var getReader = function(deferred, scope, file) {
+            var reader = new FileReader();
+            reader.onload = onLoad(reader, deferred, scope,file);
+            reader.onerror = onError(reader, deferred, scope);
+            reader.onprogress = onProgress(reader, scope);
+            return reader;
+        };
+
+        var readAsDataURL = function(file, scope) {
+            var deferred = $q.defer();
+            var reader = getReader(deferred, scope,file);
+            reader.readAsDataURL(file);
+
+            return deferred.promise;
+        };
+        return {
+            readAsDataUrl: readAsDataURL
+        };
+    }]);
+
+</script>
+</html>
