@@ -3,7 +3,8 @@
 - 采用jquery-blockUi插件
 - 采用onload.html的方式
 ## 关于angular-UI-bootstrap
-- [angularJs-UI-bootstrap系列教程1(使用前的准备)](http://www.cnblogs.com/HeJason/p/5315947.html)
+- [**angularJs-UI-bootstrap系列教程1(使用前的准备)**](http://www.cnblogs.com/HeJason/p/5315947.html)
+- [**angular-ui官网**](http://angular-ui.github.io/bootstrap/)
 - [angular 实现modal windows效果（即模态窗口，半透明的遮罩层），以及bootstrap(css,components,js)的初步学习](http://www.cnblogs.com/oxspirt/p/4536866.html)
 - [jQuery UI Bootstrap-基于Bootstrap样式的 jQuery UI 控件 (v0.5)](http://www.bootcss.com/p/jquery-ui-bootstrap/)
 - [AngularJS+ui.bootstrap实现图片轮播](http://blog.csdn.net/yateswang/article/details/47751477)
@@ -12,3 +13,48 @@
 - [$parse/$eval和$observe/$watch如何区分](http://www.ngnice.com/posts/2314014da4eea8)
 - [**angularjs实现多张图片上传并预览功能**](http://www.jb51.net/article/106661.htm)
 - [**AngularJS图片上传功能的实现**](http://www.cnblogs.com/Uncle-Maize/p/6215710.html)
+
+
+###  ui.bootstrap.datepickerPopup  
+[JavaScript Date.setHours() 函数详解](http://www.365mini.com/page/javascript-date-sethours.htm)
+[ angularJS date filter ——时间格式化过滤器 ](http://blog.csdn.net/djzhao627/article/details/53443425)
+- datepickerPopupsettings:
+	- `close-on-date-selection` (Default: true) - 当日期选中的时候是否关闭datepicker
+	- `clear-text`  The text to display for the clear button.
+	- `close-text` The text to display for the close button.
+	- `current-text` The text to display for the current day button.
+
+
+- angular的date filter服务
+{{ now | date : 'yyyy-MM-dd HH:mm:ss'}}
+{{ now | date:'medium' }}<!-- Dec 3, 2016 10:43:51 AM -->
+{{ now | date:'short' }}<!-- 12/3/16 10:43 AM -->
+{{ now | date:'fullDate' }}<!-- Saturday, December 3, 2016 -->
+{{ now | date:'longDate' }}<!-- December 3, 2016 -->
+{{ now | date:'mediumDate' }}<!-- Dec 3, 2016 -->
+{{ now | date:'shortDate' }}<!-- 12/3/16 -->
+{{ now | date:'mediumTime' }}<!-- 10:43:51 AM -->
+{{ now | date:'shortTime' }}<!-- 10:43 AM -->
+
+- javascript setHours()
+date.setHours( hours[, minutes[, seconds[, milliseconds ]]] )
+|参数|描述|
+|------|------|
+|hours|Number类型指定的小时值。|
+|minutes|可选/Number类型指定的分钟值。|
+|seconds|可选/Number类型指定的秒值。|
+|milliseconds|可选/Number类型指定的毫秒值。|
+```
+//定义一个Date对象"2012-03-15 13:11:43 123"
+var date = new Date(2012, 2, 15, 13, 11, 43, 123);
+document.writeln( date.toLocaleString() ); // 2012年3月15日 13:11:43
+
+date.setHours(23);
+document.writeln( date.toLocaleString() ); // 2012年3月15日 23:11:43
+
+date.setHours(13, 20, 5);
+document.writeln( date.toLocaleString() ); // 2012年3月15日 13:20:05
+
+date.setHours(26, -3, 100);
+document.writeln( date.toLocaleString() ); // 2012年3月16日 1:58:40
+```
