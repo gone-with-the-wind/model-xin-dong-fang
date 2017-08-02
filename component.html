@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 1.5.8 component</title>
+    <script src="js/angular.min.js"></script>
+    <script type="text/javascript">
+    angular.module('myApp', [])
+        .component('parentComponent', {
+            controller: function() {
+                this.foo = function() {
+                    console.log('Foo from parent!');
+                };
+            }
+        })
+        .component('childComponent', {
+            require: {
+                parent: '^parentComponent'
+            },
+            bindings: {
+                name: '@'
+            },
+            controller: function() {
+                this.$onInit = function() {
+                    this.parent.foo();
+                };
+                this.myName = 'tom';
+            },
+            template: "Hello {{$ctrl.name}}, I'm {{$ctrl.myName}}!",
+        });
+    </script>
+</head>
+
+<body>
+    <div ng-app="myApp">
+        <parent-component>
+            <child-component name="jack"></child-component>
+        </parent-component>
+    </div>
+</body>
+
+</html>
+

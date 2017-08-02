@@ -17,7 +17,7 @@
 
 ###  ui.bootstrap.datepickerPopup  
 [JavaScript Date.setHours() 函数详解](http://www.365mini.com/page/javascript-date-sethours.htm)
-[ angularJS date filter ——时间格式化过滤器 ](http://blog.csdn.net/djzhao627/article/details/53443425)
+[angularJS date filter ——时间格式化过滤器](http://blog.csdn.net/djzhao627/article/details/53443425)
 - datepickerPopupsettings:
 	- `close-on-date-selection` (Default: true) - 当日期选中的时候是否关闭datepicker
 	- `clear-text`  The text to display for the clear button.
@@ -58,3 +58,18 @@ document.writeln( date.toLocaleString() ); // 2012年3月15日 13:20:05
 date.setHours(26, -3, 100);
 document.writeln( date.toLocaleString() ); // 2012年3月16日 1:58:40
 ```
+
+
+###  ui.bootstrap.Modal 
+- appendTo:Appends the modal to a specific element.
+
+- resolve的使用
+[初学AngularJs路由（七）：Ui-router-resolve(预加载)](http://blog.csdn.net/oak160/article/details/53035496)
+[深入理解ANGULARUI路由_UI-ROUTER](http://www.cnblogs.com/hughtxp/p/3965916.html)
+[AngularJs的UI组件ui-Bootstrap分享（十）——Model](http://www.cnblogs.com/gongshunkai/p/6752601.html)
+[**angular-ui-bootstrap-modal必须要说的几个点**](https://my.oschina.net/codingBingo/blog/715869)
+
+- angular的component
+[Build an Angular 1.5 component](http://www.jianshu.com/p/3daec67dd176)
+[angular学习（十三）——Component](http://blog.csdn.net/lastsweetop/article/details/56285838?locationNum=2&fps=1)
+
