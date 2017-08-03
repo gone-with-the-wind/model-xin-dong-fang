@@ -73,3 +73,13 @@ document.writeln( date.toLocaleString() ); // 2012年3月16日 1:58:40
 [Build an Angular 1.5 component](http://www.jianshu.com/p/3daec67dd176)
 [angular学习（十三）——Component](http://blog.csdn.net/lastsweetop/article/details/56285838?locationNum=2&fps=1)
 
+[div中的input居中问题](http://bbs.csdn.net/topics/380209045)
+[HTML input 选择文件转成base64编码](https://www.waitig.com/html-input-%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6%E8%BD%AC%E6%88%90base64%E7%BC%96%E7%A0%81.html)
+
+
+## HTML input 选择文件转成base64编码
+
+解决formdata不通用问题
+解决传入非图片格式问题
+
+
