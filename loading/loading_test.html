@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta>
+<title>Document</title>
+    
+    
+    
+    
+    <style>	
+    [ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak.x-ng-cloak{
+    display: none!important;
+    } 
+    .form-control{
+    margin-top:20px!important;
+    }
+	.form-horizontal .control-label{
+    margin-top:20px!important;
+    }
+    
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-cloak>
+<div id="loading-bar-container"></div>
+
+    
+    
+    
+    <form action="" class="form-horizontal" role="form">
+
+       <div class="form-group" style="width:98%">
+          <div ng-repeat="demo_data in resume_en">
+              <label class="col-md-1 col-sm-2 control-label">{{demo_data.key}}</label>
+              <div class="col-md-3 col-sm-2">
+                 <input type={{demo_data.type}} class="form-control" placeholder="">
+              </div>
+          </div>
+       </div>
+
+    </form>
+
+
+    <div class="table-responsive">
+        <caption>TABLE</caption>
+        
+        <table class="table">
+            <thead>
+             <tr ng-repeat="tableH in tableH">
+                <th>
+                    <input type="checkbox">
+                </th>
+                <th>{{tableH.tHone}}</th>
+                <th>{{tableH.tHtwo}}</th>
+                <th>{{tableH.tHthree}}</th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr ng-repeat="tableD in tableD">
+                <td>
+                    <input type="checkbox">
+                </td>
+                <th>{{tableD.trone}}</th>
+                <th>{{tableD.trtwo}}</th>
+                <th>{{tableD.trthree}}</th>
+             </tr>
+          </tbody>
+        </table>
+    </div>
+
+    
+
+</body>
+<link rel="stylesheet" href="../css/loading-bar.css">
+   
+   <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-animate.min.js"></script>
+    <script src="../js/loading-bar.js"></script>
+    <script>
+    var app = angular.module('app', ['chieffancypants.loadingBar', 'ngAnimate']);
+
+    app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    cfpLoadingBarProvider.includeBar  = true;
+    cfpLoadingBarProvider.spinnerTemplate = '<img src="../img/onload.gif">';
+    }]);
+
+
+    app.controller('ctrl', function($scope, $http, $timeout,cfpLoadingBar) {
+    $scope.start = function() {
+        cfpLoadingBar.start();
+    };
+
+    $scope.complete = function () {
+        cfpLoadingBar.complete();
+    }
+    cfpLoadingBar.start();
+    $http.post("http://localhost:8888/loading/demo.json")
+        .then(function(data) {
+            $scope.complete();
+            $timeout(function() {
+                $scope.resume_en = data.data.resume_en;
+                $scope.tableD = data.data.tableD;
+                $scope.tableH = data.data.tableH;
+            }, 750);
+
+        },function(){
+            console.log("an unexpected error ocurred resume_pc")
+        })
+    });
+
+    </script>
+</html>

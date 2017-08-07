@@ -82,4 +82,170 @@ document.writeln( date.toLocaleString() ); // 2012年3月16日 1:58:40
 解决formdata不通用问题
 解决传入非图片格式问题
 
+## 跨域
+[跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+- ajax是不能跨域的，这是主流浏览器出于安全考虑都不允许的。除非你的接口的服务器和你的网站拥有相同的域名。
+- angular.js跨域解决方案
+
+## loading加载数据
+[angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar)
+
+
+## 搭建node本地环境
+[简单搭建nodeJS服务，访问本地站点文件](http://blog.csdn.net/u014420383/article/details/47945819)
+- 安装nodejs服务(从官网下载安装)，node相当于apache服务器
+
+- 在自己定义的目录下新建服务器文件如 server.js
+```
+	var http = require('http');//引入http模块
+	//开启服务，监听8888端口
+	//端口号最好为6000以上
+	var server = http.createServer(function(req,res){
+    /*
+        req用来接受客户端数据
+        res用来向客户端发送服务器数据
+    */
+    console.log('有客户端连接');//创建连接成功显示在后台
+    //一参是http请求状态，200连接成功
+    //连接成功后向客户端写入头信息
+    res.writeHeader(200,{
+        'content-type' : 'text/html;charset="utf-8"'
+    });
+
+    res.write('这是正文部分');//显示给客户端
+    res.end();
+
+}).listen(8888);
+console.log('服务器开启成功');
+```
+- 在cmd控制台中cd切换进server.js所在的目录，然后执行node server.js命令
+当控制台显示”服务器开启成功”则说明node服务器已经建立
+
+- 在浏览器中访问服务器
+在浏览器中输入
+localhost:8888 ， 浏览器显示“这是正文部分”。
+查看cmd控制台，显示 “有客户端连接”
+可在多个浏览器窗口中进行以上操作，每个浏览器窗口均会对应一次“有客户端连接”
+### 访问本地站点文件
+- 在自定义的目录下创建node服务文件server2.js
+```
+	var http = require('http');
+	var fs = require('fs');//引入文件读取模块
+
+	var documentRoot = 'E:/PhpProject/html5/websocket/www';
+	//需要访问的文件的存放目录
+
+	var server= http.createServer(function(req,res){
+
+    var url = req.url; 
+    //客户端输入的url，例如如果输入localhost:8888/index.html
+    //那么这里的url == /index.html 
+
+    var file = documentRoot + url;
+    console.log(url);
+    //E:/PhpProject/html5/websocket/www/index.html 
+
+
+    fs.readFile( file , function(err,data){
+    /*
+        一参为文件路径
+        二参为回调函数
+            回调函数的一参为读取错误返回的信息，返回空就没有错误
+            二参为读取成功返回的文本内容
+    */
+        if(err){
+            res.writeHeader(404,{
+                'content-type' : 'text/html;charset="utf-8"'
+            });
+            res.write('<h1>404错误</h1><p>你要找的页面不存在</p>');
+            res.end();
+        }else{
+            res.writeHeader(200,{
+                'content-type' : 'text/html;charset="utf-8"'
+            });
+            res.write(data);//将index.html显示在客户端
+            res.end();
+
+        }
+
+    });
+	}).listen(8888);
+
+	console.log('服务器开启成功');
+```
+- 创建index.html文件
+
+如果要访问index.html文件，当然你得先有这个文件，不然服务器读取失败，返回404
+
+- 在cmd控制台cd切换到 server2.js的目录下执行node server2.js命令
+开启服务器
+
+- 在浏览器输入localhost:8888/index.html访问该文件
+
+## js中如何向json数组添加元素
+错误示范:
+```
+var a = ['left','top'],
+    x = [];
+
+for(i=0;i<a.length;i++) {
+    x.push({
+        a[i] : 0
+    });
+}
+```
+正确示范：You have to use bracket notation:
+```
+var obj = {};
+obj[a[i]] = 0;
+x.push(obj);
+```
+result:`x = [{left: 0}, {top: 0}]`
+如果你需要的不是对象数组而是同一个对象的两个属性：
+```
+var x = {};
+x[a[i]] = 0;
+```
+result:`x = {left: 0, top: 0}`
+
+
+```
+//1、
+var jsonstr="[{'name':'a','value':1},{'name':'b','value':2}]";
+var jsonarray = eval('('+jsonstr+')');
+  
+var arr  =
+     {
+         "name" : $('#names').val(),
+         "value" : $('#values').val()
+     }
+jsonarray.push(arr);
+ 
+//2、
+var json={};// 定义一个json对象
+ json.array1=["2","4"];// 增加一个新属性，此属性是数组
+ json.array1[json.array1.length]='6';// 数组追加一个元素
+ alert(json.array1)
+```
+
+
+```
+1，你是需要js动态创建json对象(即通常的对象)：
+var json={};
+var lst=[];
+var obj1={};
+obj1['id']=1;
+obj1['name']='name';
+obj1['type']='type';
+lst.push(obj1);
+json['content']=lst;
+
+2就是你需要json字符串(json对象转成字符串)：
+//引用json.js
+var js=JSON.stringify(json);
+
+```
+
+
+
 
