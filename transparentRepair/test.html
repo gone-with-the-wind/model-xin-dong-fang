@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+
+
+<select class="form-control" ng-model="activityId" ng-options="id as name for (id, name) in data" ></select>
+	
+</body>
+
+<script src="js/angular.min.js"></script>
+<script>
+	var app = angular.module('app',[]);
+    app.controller("ctrl",["$scope",function($scope){
+        $scope.activityId="201";
+        $scope.data = {"201":"活动1","202":"活动2","203":"活动3"}  
+    }]);
+</script>
+</html>
