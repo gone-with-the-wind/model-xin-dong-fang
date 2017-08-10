@@ -84,8 +84,20 @@ document.writeln( date.toLocaleString() ); // 2012年3月16日 1:58:40
 
 ## 跨域
 [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+[详解js跨域问题](http://www.cnblogs.com/aoldman/p/4666406.html)
+[Angular中使用$http.jsonp发送跨站请求](http://www.cnblogs.com/liangzi4000/p/6376385.html)
+[Angularjs跨域](http://www.cnblogs.com/yinghuochongfighter/p/5998194.html)
+[angularjs跨域post解决方案](http://www.cnblogs.com/y896926473/p/5754287.html)
+[AngularJS：与后端服务器通讯](http://www.cnblogs.com/wwjuan/p/5013675.html)
+[AJAX实现跨域的三种种方法（代理,JSONP,XHR2）](http://www.cnblogs.com/lvmingyin/p/5273295.html)
+
 - ajax是不能跨域的，这是主流浏览器出于安全考虑都不允许的。除非你的接口的服务器和你的网站拥有相同的域名。
 - angular.js跨域解决方案
+```
+app.config(["$sceDelegateProvider",function($sceDelegateProvider){
+    $sceDelegateProvider.resourceUrlWhitelist(["self","http://116.62.174.175:8080/**","http://localhost:8082/**"])
+}])
+```
 
 ## loading加载数据
 [angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar)
