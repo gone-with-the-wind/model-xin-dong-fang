@@ -290,6 +290,35 @@ AUTO 自动调整按键 自动调整显示器各参数.
 OK键－－有的是ok外加一个圈，有的是一个箭头插入方或圆圈中，表示确认，类似回车，按一下进入主菜单；
 退出键－－多数是一个箭头从方或圆圈中出来，表示退出返回，类似电脑上的ESC键。 
 
+## 显示器按下menu怎么退出
+稍等一会儿就自动消失了，等不及的话再按一下就会退出设置菜单，如果两种方法都不行，有可能是显示器小键盘板出问题了。
+
+
+
+## sublime主题
+[Sublime绿色主题皮肤 ](https://github.com/JasmineChoi/Green-ColorScheme)
+[Theme - Brogrammer](https://packagecontrol.io/packages/Theme%20-%20Brogrammer)
+[有那些炫酷的sublime text3 主题？](https://www.zhihu.com/question/46266742)
+[如何优雅使用Sublime Text3（Sublime设置豆沙绿背景色和自定义主题）](http://www.cnblogs.com/xiezhidong/p/6069808.html)
+
+
+## sublime自动补全代码
+Preferences=>Setting-User=>输入｛"auto_complete": true,"auto_match_enabled": true｝
+sublime bootstrap自动补全插件  ctrl+shift+p调出PackageControl=>Install Package=>搜索`Bootstrap 4 Autocomplete`
+[使用Sublime Text3开发AngularJs](http://www.cnblogs.com/yys369/p/5516078.html)
+
+## sublime使用技巧
+- 双击左边栏title可以打开多标签页，单击左边栏title只会覆盖原来打开的标签页。
+
+- 同一份文件分屏显示：
+[Sublime Text 如何一个代码双屏显示代码上下部分？](https://www.zhihu.com/question/32381975)
+[Sublime text 2 分屏模式时候如何快速切换左右两边窗口？](https://www.v2ex.com/t/64901)
+[sublime text3怎么分屏显示及关闭分屏？](http://jingyan.baidu.com/article/25648fc19473bb9191fd00c2.html)
+打开一个文件，然后 File->new view into file,这时候会有两个相同文件的tab，然后新建一个column(view->layout->cloumns:2) ，然后把其中一个拖到新column中（注意：只能拖动到新column的标签区域，拖动到内容区域会在新启动的sublime中打开拖动文件）
+
+
+## sublime 插件
+backrefs =>代码内容区域左边栏显示代码会级结构
 
 
 
