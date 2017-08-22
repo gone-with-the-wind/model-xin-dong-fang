@@ -201,6 +201,9 @@ localhost:8888 ， 浏览器显示“这是正文部分”。
 - 在站点目录下开启命令行输入  `http-server`
 访问: http://localhost:8080 or http://127.0.0.1:8080 
 
+注意：node全局安装了http-server后，在站点目录下命令行输入http-server后报错？
+1. 把完整的目录带上执行http-server试试`D:\Program Files\nodejs\node_global\http-server`
+2. 可以的话，那么可能是环境变量问题了，把这个路径加入到path下，然后就可以在任意目录执行http-server了
 
 
 
@@ -316,9 +319,23 @@ sublime bootstrap自动补全插件  ctrl+shift+p调出PackageControl=>Install P
 [sublime text3怎么分屏显示及关闭分屏？](http://jingyan.baidu.com/article/25648fc19473bb9191fd00c2.html)
 打开一个文件，然后 File->new view into file,这时候会有两个相同文件的tab，然后新建一个column(view->layout->cloumns:2) ，然后把其中一个拖到新column中（注意：只能拖动到新column的标签区域，拖动到内容区域会在新启动的sublime中打开拖动文件）
 
+- 底部查找怎么关闭？ESC
 
 ## sublime 插件
 backrefs =>代码内容区域左边栏显示代码会级结构
+
+
+## Fiddler
+[[HTTP]Fiddler（一） - Fiddler简介](http://blog.csdn.net/ohmygirl/article/details/17846199)
+
+## RunJS - 在线编辑、展示、分享、交流你的 JavaScript 代码
+[RunJS - 在线编辑、展示、分享、交流你的 JavaScript 代码](http://runjs.cn/code)
+[fiddle](https://jsfiddle.net/)
+[jsbin](http://jsbin.com/?html,js,output)
+
+
+
+
 
 
 
