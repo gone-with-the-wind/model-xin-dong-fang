@@ -317,7 +317,7 @@ sublime bootstrap自动补全插件  ctrl+shift+p调出PackageControl=>Install P
 [Sublime Text 如何一个代码双屏显示代码上下部分？](https://www.zhihu.com/question/32381975)
 [Sublime text 2 分屏模式时候如何快速切换左右两边窗口？](https://www.v2ex.com/t/64901)
 [sublime text3怎么分屏显示及关闭分屏？](http://jingyan.baidu.com/article/25648fc19473bb9191fd00c2.html)
-打开一个文件，然后 File->new view into file,这时候会有两个相同文件的tab，然后新建一个column(view->layout->cloumns:2) ，然后把其中一个拖到新column中（注意：只能拖动到新column的标签区域，拖动到内容区域会在新启动的sublime中打开拖动文件）
+打开一个文件，然后 File->new view into file,这时候会有两个相同文件的tab，然后新建一个column(view->layout->cloumns:2) ，然后把其中一个拖到新column中（注意：只能拖动到新column的标签区域，拖动到内容区域会在新启动的sublime中打开拖动文件  注意：不同sublime之间也可以进行标签拖动）
 
 - 底部查找怎么关闭？ESC
 
@@ -332,6 +332,13 @@ backrefs =>代码内容区域左边栏显示代码会级结构
 [RunJS - 在线编辑、展示、分享、交流你的 JavaScript 代码](http://runjs.cn/code)
 [fiddle](https://jsfiddle.net/)
 [jsbin](http://jsbin.com/?html,js,output)
+
+
+## 复制简书代码
+选中要复制的代码=>右键=>查看选中部分源代码
+
+
+## emoji
 
 
 
